@@ -24,7 +24,7 @@ namespace QuickSales
     /// </summary>
     public partial class LogInScreen : Window, INotifyPropertyChanged
     {
-
+        //
         enum Status
         {
             LoginScreen,
