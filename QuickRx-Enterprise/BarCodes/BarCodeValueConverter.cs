@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Media.Imaging;
-using System.Drawing.Imaging;
 
 namespace BarCodes
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
-
-namespace RMSDataAccessLayer
+﻿namespace RMSDataAccessLayer
 {
     public partial class Cashier
     {

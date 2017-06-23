@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using log4netWrapper;
 using QuickSales.Properties;

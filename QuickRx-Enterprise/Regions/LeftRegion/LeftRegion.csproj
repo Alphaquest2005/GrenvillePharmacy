@@ -132,6 +132,8 @@
     <Content Include="Design\Green_Rx_Icon.png" />
     <Content Include="Design\Person-Undefined-Male-Dark-256.png" />
     <Content Include="Design\Sick_256.png" />
+    <Content Include="Microsoft.Practices.Prism.dll" />
+    <Content Include="Microsoft.Practices.Prism.Interactivity.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
