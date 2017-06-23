@@ -1321,9 +1321,10 @@ namespace SalesRegion
                     //fwe.UpdateLayout();
                     Size visualSize;
 
-                    visualSize = new Size(fwe.ActualWidth, fwe.ActualHeight < 270 ? 270 : fwe.ActualHeight); // paper size // 2 * 96//, fwe.ActualHeight + 5
+                //visualSize = new Size(fwe.ActualWidth, fwe.ActualHeight < 270 ? 270 : fwe.ActualHeight); // paper size // 2 * 96//, fwe.ActualHeight + 5
+                visualSize = new Size(fwe.ActualWidth, fwe.ActualHeight);
 
-                    DrawingVisual visual = PrintControlFactory.CreateDrawingVisual(fwe, fwe.ActualWidth, fwe.ActualHeight);//fwe.ActualWidth// , 
+                DrawingVisual visual = PrintControlFactory.CreateDrawingVisual(fwe, fwe.ActualWidth, fwe.ActualHeight);//fwe.ActualWidth// , 
 
 
                     SUT.PrintEngine.Paginators.VisualPaginator page = new SUT.PrintEngine.Paginators.VisualPaginator(
@@ -1349,7 +1350,7 @@ namespace SalesRegion
         }
 
 
-        public void PostRMSSale(string res)
+        public void PostRMSSale(string res = null)
         {
 
             try
@@ -1364,7 +1365,7 @@ namespace SalesRegion
                     TransactionData.Status = "ToBePosted";
                     SaveTransaction();
                     
-                    Post(TransactionData, res);
+                    Post(TransactionData, res ?? TransactionData.TransactionNumber);
                    
 
             }

@@ -657,8 +657,8 @@ namespace SalesRegion
 
         private async void PostToQB_Click(object sender, RoutedEventArgs e)
         {
-            var res = Microsoft.VisualBasic.Interaction.InputBox("Please Enter RMS Transaction Comment.", "Post To RMS");
-           await Task.Run(() => SalesVM.Instance.PostRMSSale(res)).ConfigureAwait(false);
+           // var res = Microsoft.VisualBasic.Interaction.InputBox("Please Enter RMS Transaction Comment.", "Post To RMS");
+           await Task.Run(() => SalesVM.Instance.PostRMSSale()).ConfigureAwait(false);
             UIDispatcher.Current.BeginInvoke(() =>
             {
                 NextBtn_MouseLeftButtonDown(sender, null);
