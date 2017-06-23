@@ -96,8 +96,8 @@ public LogInScreen()
 
         OpenDrawerGrd.DataContext = batch;
         CloseDrawerGrd.DataContext = batch;
-    //}
-    //catch (Exception ex)
+    }
+    catch (Exception ex)
     {
 
         throw ex;
