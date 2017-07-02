@@ -1676,13 +1676,33 @@ namespace SalesRegion
                  
                     try
                     {
-                        var t = trans;//trans.ChangeTracker.GetChanges();
-                        t.TransactionEntries.ToList().ForEach(x => x.TransactionEntryItem.Item = null);
-                        
+                        var t = trans.ChangeTracker.GetChanges().FirstOrDefault();//trans.ChangeTracker.GetChanges();
+                        t.TransactionEntries.ToList().ForEach(x =>
+                        {
+
+                            x.TransactionEntryItem.Item = null;
+                            if (x.TransactionEntryItem.TrackingState == TrackingState.Unchanged)
+                                x.TransactionEntryItem = null;
+                            if (x.ModifiedProperties == null) x.ModifiedProperties = new List<string>();
+                            if (x.ModifiedProperties.Contains("Amount")) x.ModifiedProperties.Remove("Amount");
+                            if (x.ModifiedProperties.Contains("SalesTax")) x.ModifiedProperties.Remove("SalesTax");
+                        });
+                        if (t.ModifiedProperties == null) t.ModifiedProperties = new List<string>();
+                        if (t.ModifiedProperties.Contains("TotalSales")) t.ModifiedProperties.Remove("TotalSales");
+                        if (t.ModifiedProperties.Contains("TotalTax")) t.ModifiedProperties.Remove("TotalTax");
+                        if (t.ModifiedProperties.Contains("Amount")) t.ModifiedProperties.Remove("Amount");
+                        if (t.ModifiedProperties.Contains("TotalDiscount")) t.ModifiedProperties.Remove("TotalDiscount");
+                        if (t.ModifiedProperties.Contains("Pharmacist")) t.ModifiedProperties.Remove("Pharmacist");
+                        if (t.ModifiedProperties.Contains("Cashier")) t.ModifiedProperties.Remove("Cashier");
+                        if (t.ModifiedProperties.Contains("Patient")) t.ModifiedProperties.Remove("Patient");
+                        if (t.ModifiedProperties.Contains("CurrentTransactionEntry")) t.ModifiedProperties.Remove("CurrentTransactionEntry");
+
+                        t.Pharmacist = null;
+                        t.Cashier = null;
+
+
                         ctx.ApplyChanges(t);
                         ctx.SaveChanges();
-                       // trans.ChangeTracker.MergeChanges(ref trans,t);
-                       GoToTransaction(t.TransactionId);
                         //.TransactionNumber = trans.TransactionNumber;
                     }
                     catch (DbUpdateConcurrencyException dce)
