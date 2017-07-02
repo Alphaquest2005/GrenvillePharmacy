@@ -1682,7 +1682,7 @@ namespace SalesRegion
                         ctx.ApplyChanges(t);
                         ctx.SaveChanges();
                        // trans.ChangeTracker.MergeChanges(ref trans,t);
-                        trans.AcceptChanges();
+                       GoToTransaction(t.TransactionId);
                         //.TransactionNumber = trans.TransactionNumber;
                     }
                     catch (DbUpdateConcurrencyException dce)

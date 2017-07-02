@@ -2,9 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.Prism.Regions;
 using RMSDataAccessLayer;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
