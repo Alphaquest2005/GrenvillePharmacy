@@ -1431,9 +1431,11 @@ namespace SalesRegion
                                 MessageBox.Show("Please Create Item In RMS with 'Prescription Fee'!");
                             }
                         }
+                       
                         TransactionData.ReferenceNumber = trn.ID.ToString();
                         TransactionData.Status = "Posted";
                         SaveTransaction(TransactionData);
+                        
                     }
                     else
                     {
@@ -1670,13 +1672,16 @@ namespace SalesRegion
                         return;
                     }
                 }
-                if (trans.ChangeTracker == null) return;
+              //if () return;
               using (var ctx = new RMSModel())
               {
                  
                     try
                     {
-                        var t = trans.ChangeTracker.GetChanges().FirstOrDefault();//trans.ChangeTracker.GetChanges();
+                        var t = trans.ChangeTracker != null? trans.ChangeTracker.GetChanges().FirstOrDefault():trans;//trans.ChangeTracker.GetChanges();
+                        t.Pharmacist = null;
+                         t.Cashier = null;
+
                         t.TransactionEntries.ToList().ForEach(x =>
                         {
 
@@ -1687,6 +1692,8 @@ namespace SalesRegion
                             if (x.ModifiedProperties.Contains("Amount")) x.ModifiedProperties.Remove("Amount");
                             if (x.ModifiedProperties.Contains("SalesTax")) x.ModifiedProperties.Remove("SalesTax");
                         });
+
+
                         if (t.ModifiedProperties == null) t.ModifiedProperties = new List<string>();
                         if (t.ModifiedProperties.Contains("TotalSales")) t.ModifiedProperties.Remove("TotalSales");
                         if (t.ModifiedProperties.Contains("TotalTax")) t.ModifiedProperties.Remove("TotalTax");
@@ -1697,13 +1704,15 @@ namespace SalesRegion
                         if (t.ModifiedProperties.Contains("Patient")) t.ModifiedProperties.Remove("Patient");
                         if (t.ModifiedProperties.Contains("CurrentTransactionEntry")) t.ModifiedProperties.Remove("CurrentTransactionEntry");
 
-                        t.Pharmacist = null;
-                        t.Cashier = null;
+                        
 
 
                         ctx.ApplyChanges(t);
                         ctx.SaveChanges();
                         //.TransactionNumber = trans.TransactionNumber;
+
+                        GoToTransaction(t.TransactionId);
+
                     }
                     catch (DbUpdateConcurrencyException dce)
                     {
